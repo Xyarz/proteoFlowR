@@ -16,47 +16,47 @@
 
 # Libraries ---------------------------------------------------------------
 
-library(ggplot2)
-library(ggtext)
-library(ggforce)
-library(ggalt)
-library(pheatmap)
-library(tidyverse)
-library(cowplot)
-library(ggfortify)
-library(markdown)
-library(RColorBrewer)
-library(ggrepel)
-library(dplyr)
-library(gridExtra)
-library(extrafont)
-library(MSnSet.utils)
-library(ConfidenceEllipse)
-library(ggsci)
-library(scales)
-library(ComplexHeatmap)
-library(circlize)
-library(ComplexUpset)
-library(factoextra)
-library(Cairo)
-library(geneset)
-library(genekitr)
-library(rrvgo)
-library(patchwork)
+# library(ggplot2)
+# library(ggtext)
+# library(ggforce)
+# library(ggalt)
+# library(pheatmap)
+# library(tidyverse)
+# library(cowplot)
+# library(ggfortify)
+# library(markdown)
+# library(RColorBrewer)
+# library(ggrepel)
+# library(dplyr)
+# library(gridExtra)
+# library(extrafont)
+# library(MSnSet.utils)
+# library(ConfidenceEllipse)
+# library(ggsci)
+# library(scales)
+# library(ComplexHeatmap)
+# library(circlize)
+# library(ComplexUpset)
+# library(factoextra)
+# library(Cairo)
+# library(geneset)
+# library(genekitr)
+# library(rrvgo)
+# library(patchwork)
 
 
 # Font Setup --------------------------------------------------------------
 
 # Load fonts
-loadfonts(device = "win")
-fonts()
+# loadfonts(device = "win")
+# fonts()
 
 
 # paths -------------------------------------------------------------------
 
-c_path <- ""
-
+# c_path <- ""
+# 
 # helper functions --------------------------------------------------------
 
-source("refactor/helper_functions.R")
+# source("helper_functions.R")
 

@@ -1,12 +1,20 @@
 # Generate lists of included proteins
-biome_upset <- data[["biome_upset"]]
+# biome_upset <- data[["biome_upset"]]
 # Replace intensity values with binary 1 for detected and 0 for not-detected
-biome_upset[biome_upset > 0] <- 1 # Replace values > 0 with 1
-biome_upset[is.na(biome_upset) | biome_upset == 0] <- 0 # Replace NA or 0 with 0
-
+# biome_upset[biome_upset > 0] <- 1 # Replace values > 0 with 1
+# biome_upset[is.na(biome_upset) | biome_upset == 0] <- 0 # Replace NA or 0 with 0
+# 
 # Merge all binary results for each entity into one column for the entity based on their indices and delete single samples
 # For ALU
 
+#' @title merge_binary_res
+#'
+#' @param data an data object, preferably a data frame
+#' @param ent_name the name of the entity to be merged, needs to be a string
+#' @param max_idx the max index this entity has in the dataframe
+#'
+#' @return data returns the provided dataset, with the modifications made
+#' @export
 merge_binary_res <- function(data, ent_name, max_idx) {
   data[[paste0("Ent_", ent_name)]] <- apply(data[, c(1:max_idx)], 1, function(x) ifelse(any(x == 1), 1, 0))
   data <- data[, -c(1:max_idx)]
@@ -14,6 +22,13 @@ merge_binary_res <- function(data, ent_name, max_idx) {
   return(data)
 }
 
+#' @title get_names_and_max_idx
+#'
+#' @param data an data object, preferably a data frame
+#'
+#' @return name_frequencies returns a list object with the unique colnames and
+#' there respective freqency of occurrence
+#' @export
 get_names_and_max_idx <- function(data) {
   name_vec <- unique(names(data))
   # Extract the base name without the numeric suffix
@@ -27,14 +42,23 @@ get_names_and_max_idx <- function(data) {
   return(name_frequencies)
 }
 
-ent_list <- get_names_and_max_idx(biome_upset)
+# ent_list <- get_names_and_max_idx(biome_upset)
 
-for (j in 1:length(ent_list)) {
-  biome_upset <- merge_binary_res(biome_upset, names(ent_list)[[j]], ent_list[[j]])
-}
+# for (j in 1:length(ent_list)) {
+  # biome_upset <- merge_binary_res(biome_upset, names(ent_list)[[j]], ent_list[[j]])
+# }
 
-biome_upset <- biome_upset[apply(biome_upset, 1, function(row) !all(row == 0)), ]
+# biome_upset <- biome_upset[apply(biome_upset, 1, function(row) !all(row == 0)), ]
 
+#' @title custom_upset_plot
+#'
+#' @param data a data object, preferably a data frame object
+#' @param query_non_acute a concatenated String vector of names to be displayed,
+#' excluding the non acute wounds
+#' @param title a title for the ggplot to be provided
+#'
+#' @return upset_plot a ggplot2 object, which contains an upset plot
+#' @export
 custom_upset_plot <- function(
     data,
     query_non_acute,
@@ -58,7 +82,7 @@ custom_upset_plot <- function(
     ),
     query_list # Add pre-existing queries
   )
-  upset_plot_biome <- upset(data,
+  upset_plot <- upset(data,
     names(data),
     base_annotations = list(
       "Intersection size" = intersection_size(
@@ -104,14 +128,14 @@ custom_upset_plot <- function(
         + geom_text(aes(label = ..count..), stat = "count", vjust = 0.4, hjust = -0.25, color = "white", size = 3))
   )
 
-  return(upset_plot_biome)
+  return(upset_plot)
 }
 
 
-upset_plot_biome <- custom_upset_plot(
-  data = biome_upset,
-  query_non_acute = c("ALU", "VLU", "MIX", "PG", "WHD"),
-  title = "Core vs. Unique Proteins"
-)
-
-upset_plot_biome
+# upset_plot_biome <- custom_upset_plot(
+#   data = biome_upset,
+#   query_non_acute = c("ALU", "VLU", "MIX", "PG", "WHD"),
+#   title = "Core vs. Unique Proteins"
+# )
+# 
+# upset_plot_biome
