@@ -73,3 +73,13 @@ exclude_rowname <- function(data, str_idx){
   return(data)
 }
 
+
+#' @title load_custom_fonts
+#' @description
+#' loads the custom fonts 
+#' 
+#' @export
+load_custom_fonts <- function() {
+  loadfonts(device = "win")
+  fonts()
+}

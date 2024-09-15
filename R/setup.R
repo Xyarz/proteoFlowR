@@ -43,20 +43,3 @@
 # library(genekitr)
 # library(rrvgo)
 # library(patchwork)
-
-
-# Font Setup --------------------------------------------------------------
-
-# Load fonts
-# loadfonts(device = "win")
-# fonts()
-
-
-# paths -------------------------------------------------------------------
-
-# c_path <- ""
-# 
-# helper functions --------------------------------------------------------
-
-# source("helper_functions.R")
-
